@@ -21,7 +21,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "aw_host.h"
+#include "aw_typedef.h"
+#include "aw_config_app.h"
+#include "aw_config_io.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,6 +107,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  kt_hostProcess();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
