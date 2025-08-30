@@ -231,7 +231,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 115200;
+  huart1.Init.BaudRate = 9600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
@@ -279,7 +279,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 9600;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -338,7 +338,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, RELAY_HEALTH_Pin|RELAY_SD_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, RELAY_CAP_1_Pin|RELAY_CAP_2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, RELAY_CAP_1_Pin|RELAY_CAP_2_Pin|DBG_PIN_OUT_Pin|DBG_PIN_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, RELAY_CAP_3_Pin|GSM_PWR_Pin|GSM_RESET_Pin, GPIO_PIN_RESET);
@@ -373,8 +373,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : RELAY_CAP_1_Pin RELAY_CAP_2_Pin */
-  GPIO_InitStruct.Pin = RELAY_CAP_1_Pin|RELAY_CAP_2_Pin;
+  /*Configure GPIO pins : RELAY_CAP_1_Pin RELAY_CAP_2_Pin DBG_PIN_OUT_Pin DBG_PIN_LED_Pin */
+  GPIO_InitStruct.Pin = RELAY_CAP_1_Pin|RELAY_CAP_2_Pin|DBG_PIN_OUT_Pin|DBG_PIN_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -386,6 +386,18 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : SW_ON_Pin */
+  GPIO_InitStruct.Pin = SW_ON_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(SW_ON_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SW_OFF_Pin SW_AUTO_Pin SW_2PH_Pin DBG_PIN_IN_Pin */
+  GPIO_InitStruct.Pin = SW_OFF_Pin|SW_AUTO_Pin|SW_2PH_Pin|DBG_PIN_IN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

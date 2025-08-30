@@ -184,7 +184,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    GPIO_InitStruct.Pin = UART1_TX_USER_Pin|UART1_RX_USER_Pin;
+    GPIO_InitStruct.Pin = UART1_TX_GSM_Pin|UART1_RX_GSM_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -218,7 +218,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     PA14-BOOT0     ------> USART2_TX
     PA15     ------> USART2_RX
     */
-    GPIO_InitStruct.Pin = UART2_TX_GSM_Pin|UART2_RX_GSM_Pin;
+    GPIO_InitStruct.Pin = UART2_TX_USER_Pin|UART2_RX_USER_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -252,7 +252,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    HAL_GPIO_DeInit(GPIOA, UART1_TX_USER_Pin|UART1_RX_USER_Pin);
+    HAL_GPIO_DeInit(GPIOA, UART1_TX_GSM_Pin|UART1_RX_GSM_Pin);
 
     /* USER CODE BEGIN USART1_MspDeInit 1 */
 
@@ -270,7 +270,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
     PA14-BOOT0     ------> USART2_TX
     PA15     ------> USART2_RX
     */
-    HAL_GPIO_DeInit(GPIOA, UART2_TX_GSM_Pin|UART2_RX_GSM_Pin);
+    HAL_GPIO_DeInit(GPIOA, UART2_TX_USER_Pin|UART2_RX_USER_Pin);
 
     /* USER CODE BEGIN USART2_MspDeInit 1 */
 
