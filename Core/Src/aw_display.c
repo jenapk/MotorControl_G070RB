@@ -1,7 +1,7 @@
 #include <string.h>
-#include "r_cg_wdt.h"
-#include "inst_read.h"
-#include "em_measurement.h"
+//#include "r_cg_wdt.h"
+//#include "inst_read.h"
+//#include "em_measurement.h"
 #include "aw_lcd_gdm.h"
 #include "aw_display.h"
 #include "aw_config_app.h"
@@ -132,7 +132,7 @@ void aw_dispExitFromProgMode(void)
 void aw_dispVI(void)
 {
 	uint8_t i = 0;
-	uint16_t fg_num = 0, fg_dec = 0;
+	uint16_t fg_num = 0;	//, fg_dec = 0;
 	uint16_t l_remVal = 0;
 	
 	g_defScreen = 0x01;		//set default screen [switch can start motor in manual mode]
@@ -146,10 +146,10 @@ void aw_dispVI(void)
 		//Get voltage and current
 		for(i = 0; i < 3; i++)
 		{
-			g_phVolt[i] = g_inst_read_params.vrms[i];	
-			g_phVolt[i] *= g_factVoltage[i];
+			g_phVolt[i] = g_rsmVoltage[i];
+			g_phVolt[i] *= g_rsmCurrent[i];
 			
-			g_phCurr[i] = g_inst_read_params.irms[i];
+			g_phCurr[i] = g_rsmCurrent[i];
 			if(g_phCurr[i] < 100) g_phCurr[i] = 0x00;	//discard for 1000mA
 			g_phCurr[i] *= g_factCurrent[i];
 		}
@@ -229,7 +229,8 @@ void aw_dispPORMessage(void)
 	
 	while(fg_dispSecDelay)
 	{
-		R_WDT_Restart(); 	
+		//jena: watchdog to be implemented
+		//R_WDT_Restart();
 	}
 }
 
@@ -362,8 +363,15 @@ void aw_dispNotifyMessage(uint8_t a_notificationCode)
 	}
 	
 	aw_lcdDisplay(LCD_LINE_4, fg_dispBuffer4);
+
 	//RED Led Indication (0x00-On, 0x01: off)
-	LED_ERROR_PIN = ((a_notificationCode && (a_notificationCode != SPL_DISP_AUTO_MODE_COUNT_DOWN)) ? 0x01 : 0x00);		//negated as transistor used for LEDs
+	uint8_t l_retVal = 0;
+	l_retVal = ((a_notificationCode && (a_notificationCode != SPL_DISP_AUTO_MODE_COUNT_DOWN)) ? 0x01 : 0x00);		//negated as transistor used for LEDs
+
+	if(l_retVal)
+		LED_ERROR_ON();
+	else
+		LED_ERROR_OFF();
 }
 
 void aw_dispScheduler(void)

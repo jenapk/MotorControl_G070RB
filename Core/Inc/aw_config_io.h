@@ -2,7 +2,7 @@
 #ifndef _AW_CONFIG_IO_H_
 #define _AW_CONFIG_IO_H_
 //=============================================================================
-#include "iodefine.h"
+#include "stm32g0xx_hal.h"
 #include "aw_typedef.h"
 
 #define BIT0				0x0001
@@ -29,82 +29,154 @@
 #define C2 	3
 #define C3	4
 
+//===============================================
+#define ADC_VR_Pin 				GPIO_PIN_0
+#define ADC_VR_GPIO_Port 		GPIOA
+#define ADC_VY_Pin 				GPIO_PIN_1
+#define ADC_VY_GPIO_Port 		GPIOA
+#define ADC_VB_Pin 				GPIO_PIN_2
+#define ADC_VB_GPIO_Port 		GPIOA
+#define ADC_IR_Pin 				GPIO_PIN_3
+#define ADC_IR_GPIO_Port 		GPIOA
+#define ADC_IY_Pin 				GPIO_PIN_4
+#define ADC_IY_GPIO_Port 		GPIOA
+#define ADC_IB_Pin 				GPIO_PIN_5
+#define ADC_IB_GPIO_Port 		GPIOA
+
+#define SW_LEFT_Pin 			GPIO_PIN_6
+#define SW_LEFT_GPIO_Port 		GPIOA
+#define SW_RIGHT_Pin 			GPIO_PIN_7
+#define SW_RIGHT_GPIO_Port 		GPIOA
+#define SW_UP_Pin 				GPIO_PIN_4
+#define SW_UP_GPIO_Port 		GPIOC
+#define SW_DN_Pin 				GPIO_PIN_5
+#define SW_DN_GPIO_Port 		GPIOC
+
+#define LCD_PWR_Pin 			GPIO_PIN_8
+#define LCD_PWR_GPIO_Port 		GPIOB
+#define LCD_RS_Pin 				GPIO_PIN_6
+#define LCD_RS_GPIO_Port 		GPIOD
+#define LCD_WR_Pin 				GPIO_PIN_11
+#define LCD_WR_GPIO_Port 		GPIOC
+#define LCD_D0_Pin 				GPIO_PIN_0
+#define LCD_D0_GPIO_Port 		GPIOB
+#define LCD_D1_Pin 				GPIO_PIN_1
+#define LCD_D1_GPIO_Port 		GPIOB
+#define LCD_D2_Pin 				GPIO_PIN_2
+#define LCD_D2_GPIO_Port 		GPIOB
+#define LCD_D3_Pin 				GPIO_PIN_3
+#define LCD_D3_GPIO_Port 		GPIOB
+#define LCD_D4_Pin 				GPIO_PIN_4
+#define LCD_D4_GPIO_Port 		GPIOB
+#define LCD_D5_Pin 				GPIO_PIN_5
+#define LCD_D5_GPIO_Port 		GPIOB
+#define LCD_D6_Pin 				GPIO_PIN_6
+#define LCD_D6_GPIO_Port 		GPIOB
+#define LCD_D7_Pin 				GPIO_PIN_7
+#define LCD_D7_GPIO_Port 		GPIOB
+
+#define LED_RUN_Pin 			GPIO_PIN_10
+#define LED_RUN_GPIO_Port 		GPIOB
+#define LED_ERR_Pin 			GPIO_PIN_11
+#define LED_ERR_GPIO_Port 		GPIOB
+
+#define UART1_TX_GSM_Pin 		GPIO_PIN_9
+#define UART1_TX_GSM_GPIO_Port 	GPIOA
+#define UART1_RX_GSM_Pin 		GPIO_PIN_10
+#define UART1_RX_GSM_GPIO_Port 	GPIOA
+#define UART2_TX_USER_Pin 		GPIO_PIN_14
+#define UART2_TX_USER_GPIO_Port GPIOA
+#define UART2_RX_USER_Pin 		GPIO_PIN_15
+#define UART2_RX_USER_GPIO_Port GPIOA
+
+#define GSM_PWR_Pin 			GPIO_PIN_12
+#define GSM_PWR_GPIO_Port 		GPIOA
+#define GSM_RESET_Pin 			GPIO_PIN_13
+#define GSM_RESET_GPIO_Port 	GPIOA
+
+#define RELAY_HEALTH_Pin 		GPIO_PIN_6
+#define RELAY_HEALTH_GPIO_Port 	GPIOC
+#define RELAY_SD_Pin 			GPIO_PIN_7
+#define RELAY_SD_GPIO_Port 		GPIOC
+#define RELAY_CAP_1_Pin 		GPIO_PIN_8
+#define RELAY_CAP_1_GPIO_Port 	GPIOD
+#define RELAY_CAP_2_Pin 		GPIO_PIN_9
+#define RELAY_CAP_2_GPIO_Port 	GPIOD
+#define RELAY_CAP_3_Pin 		GPIO_PIN_11
+#define RELAY_CAP_3_GPIO_Port 	GPIOA
+
+#define SW_ON_Pin 				GPIO_PIN_9
+#define SW_ON_GPIO_Port 		GPIOC
+#define SW_OFF_Pin 				GPIO_PIN_0
+#define SW_OFF_GPIO_Port 		GPIOD
+#define SW_AUTO_Pin 			GPIO_PIN_1
+#define SW_AUTO_GPIO_Port 		GPIOD
+#define SW_2PH_Pin 				GPIO_PIN_2
+#define SW_2PH_GPIO_Port 		GPIOD
+
+#define DBG_PIN_IN_Pin 			GPIO_PIN_3
+#define DBG_PIN_IN_GPIO_Port 	GPIOD
+#define DBG_PIN_OUT_Pin 		GPIO_PIN_4
+#define DBG_PIN_OUT_GPIO_Port 	GPIOD
+#define DBG_PIN_LED_Pin 		GPIO_PIN_5
+#define DBG_PIN_LED_GPIO_Port 	GPIOD
+
+#define LED_HEALTH_Pin 			GPIO_PIN_9
+#define LED_HEALTH_GPIO_Port 	GPIOB
+#define LCD_EN_Pin 				GPIO_PIN_10
+#define LCD_EN_GPIO_Port 		GPIOC
+//===============================================
+//HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState)
+//HAL_GPIO_TogglePin(LED_ERR_GPIO_Port, LED_ERR_Pin)
 //LED
-#define LED_ERROR_PIN			P12_bit.no5				//LED1 - Error LED
-#define LED_ERROR_ON()			LED_ERROR_PIN = 1
-#define LED_ERROR_OFF()			LED_ERROR_PIN = 0
-#define LED_ERROR_TOGGLE()		LED_ERROR_PIN = ~LED_ERROR_PIN
+#define LED_ERROR_ON()			HAL_GPIO_WritePin(LED_ERR_GPIO_Port, LED_ERR_Pin, 1)
+#define LED_ERROR_OFF()			HAL_GPIO_WritePin(LED_ERR_GPIO_Port, LED_ERR_Pin, 0)
+#define LED_ERROR_TOGGLE()		HAL_GPIO_TogglePin(LED_ERR_GPIO_Port, LED_ERR_Pin)
 
-#define LED_HEALTH_PIN			P1_bit.no4				//LED2 - Healthy LED
-#define LED_HEALTH_ON()			LED_HEALTH_PIN = 1	
-#define LED_HEALTH_OFF()		LED_HEALTH_PIN = 0
-#define LED_HEALTH_TOGGLE()		LED_HEALTH_PIN = ~LED_HEALTH_PIN
+#define LED_HEALTH_ON()			HAL_GPIO_WritePin(LED_HEALTH_GPIO_Port, LED_HEALTH_Pin, 1)
+#define LED_HEALTH_OFF()		HAL_GPIO_WritePin(LED_HEALTH_GPIO_Port, LED_HEALTH_Pin, 0)
+#define LED_HEALTH_TOGGLE()		HAL_GPIO_TogglePin(LED_HEALTH_GPIO_Port, LED_HEALTH_Pin)
 
-#define LED_RUN_PIN				P1_bit.no3				//LED3 -- as Load LED
-#define LED_RUN_ON()			LED_RUN_PIN = 1
-#define LED_RUN_OFF()			LED_RUN_PIN = 0
-#define LED_RUN_TOGGLE()		LED_RUN_PIN = ~LED_RUN_PIN
-
-//#define DEBUG_PIN				P1_bit.no2				//LED4
-//#define DEBUG_HIGH()			DEBUG_PIN = 1
-//#define DEBUG_LOW()			DEBUG_PIN = 0
-//#define DEBUG_TOGGLE()		DEBUG_PIN = ~DEBUG_PIN
+#define LED_RUN_ON()			HAL_GPIO_WritePin(LED_RUN_GPIO_Port, LED_RUN_Pin, 1)
+#define LED_RUN_OFF()			HAL_GPIO_WritePin(LED_RUN_GPIO_Port, LED_RUN_Pin, 0)
+#define LED_RUN_TOGGLE()		HAL_GPIO_TogglePin(LED_RUN_GPIO_Port, LED_RUN_Pin)
 
 //lcd io pins
-#define LCD_RS					P1_bit.no0
-#define LCD_EN					P0_bit.no5
-#define LCD_DB4					P1_bit.no1				//LCD_RW
-#define LCD_DB5					P4_bit.no3				//Buzzer
-#define LCD_DB6					P0_bit.no6 				//MISO
-#define LCD_DB7					P0_bit.no7				//MOSI
+#define LCD_EN_LOW()			HAL_GPIO_WritePin(LCD_EN_GPIO_Port, LCD_EN_Pin, 0)
+#define LCD_EN_HIGH()			HAL_GPIO_WritePin(LCD_EN_GPIO_Port, LCD_EN_Pin, 1)
+#define LCD_RS_LOW()			HAL_GPIO_WritePin(LCD_RS_GPIO_Port, LCD_RS_Pin, 0)
+#define LCD_RS_HIGH()			HAL_GPIO_WritePin(LCD_RS_GPIO_Port, LCD_RS_Pin, 1)
 
-#define LCD_EN_LOW()			LCD_EN = 0x00
-#define LCD_EN_HIGH()			LCD_EN = 0x01
-#define LCD_RS_LOW()			LCD_RS = 0x00
-#define LCD_RS_HIGH()			LCD_RS = 0x01
-#define LCD_D4_HIGH()			LCD_DB4 = 1
-#define LCD_D4_LOW()			LCD_DB4 = 0
-#define LCD_D5_HIGH()			LCD_DB5 = 1
-#define LCD_D5_LOW()			LCD_DB5 = 0
-#define LCD_D6_HIGH()			LCD_DB6 = 1
-#define LCD_D6_LOW()			LCD_DB6 = 0
-#define LCD_D7_HIGH()			LCD_DB7 = 1
-#define LCD_D7_LOW()			LCD_DB7 = 0
+#define LCD_DATA(n)
 
-//switches
-#define SW_SHIFT				P7_bit.no3				//shift
-#define SW_MOVE					P7_bit.no2				//move (left/right)
-#define SW_UPDN					P7_bit.no1				//up-down
-#define SW_SET					P7_bit.no0				//Enter
-//#define SW_CALIB				P7_bit.no4				//for calibration
-#define SW_AUTO_MANUAL()		P1_bit.no6				//1: Auto, 0: Manual
-#define SW_PHASE()				P13_bit.no7				//1-Phase Switch On, 0-Off
+////switches
+//#define SW_SHIFT				P7_bit.no3				//shift
+//#define SW_MOVE					P7_bit.no2				//move (left/right)
+//#define SW_UPDN					P7_bit.no1				//up-down
+//#define SW_SET					P7_bit.no0				//Enter
+
+#define SW_AUTO_MANUAL()		HAL_GPIO_ReadPin(SW_AUTO_GPIO_Port, SW_AUTO_Pin)			//1: Auto, 0: Manual
+#define SW_PHASE()				HAL_GPIO_ReadPin(SW_2PH_GPIO_Port, SW_2PH_Pin)				//1-Phase Switch On, 0-Off
 
 //Relays [L1 - Healthy, L2 - Start-Delta, C1, C2, C3 - Capacitors]
-#define RELAY_C1_PIN			P12_bit.no6				//Relay1: J67
-#define RELAY_C1_ON()			RELAY_C1_PIN = 1
-#define RELAY_C1_OFF()			RELAY_C1_PIN = 0
-#define RELAY_C1_TOGGLE()		RELAY_C1_PIN = ~RELAY_C1_PIN
+#define RELAY_C1_ON()			HAL_GPIO_WritePin(RELAY_CAP_1_GPIO_Port, RELAY_CAP_1_Pin, 1)	//Relay1: J67
+#define RELAY_C1_OFF()			HAL_GPIO_WritePin(RELAY_CAP_1_GPIO_Port, RELAY_CAP_1_Pin, 0)
 
-#define RELAY_L1_PIN			P1_bit.no7				//Relay2: J71	--Pulled Up
-#define RELAY_L1_ON()			RELAY_L1_PIN = 0		//negative logic
-#define RELAY_L1_OFF()			RELAY_L1_PIN = 1
-#define RELAY_L1_TOGGLE()		RELAY_L1_PIN = ~RELAY_L1_PIN
+//Relay2: J71	--Pulled Up
+#define RELAY_L1_ON()			HAL_GPIO_WritePin(RELAY_HEALTH_GPIO_Port, RELAY_HEALTH_Pin, 0)		//negative logic
+#define RELAY_L1_OFF()			HAL_GPIO_WritePin(RELAY_HEALTH_GPIO_Port, RELAY_HEALTH_Pin, 1)
 
-#define RELAY_L2_PIN			P6_bit.no2				//Relay3: J69	--Pulled Up
-#define RELAY_L2_ON()			RELAY_L2_PIN = 0		//negative logic
-#define RELAY_L2_OFF()			RELAY_L2_PIN = 1
-#define RELAY_L2_TOGGLE()		RELAY_L2_PIN = ~RELAY_L2_PIN
+//Relay3: J69	--Pulled Up
+#define RELAY_L2_ON()			HAL_GPIO_WritePin(RELAY_SD_GPIO_Port, RELAY_SD_Pin, 0)		//negative logic
+#define RELAY_L2_OFF()			HAL_GPIO_WritePin(RELAY_SD_GPIO_Port, RELAY_SD_Pin, 1)
 
-#define RELAY_C2_PIN			P1_bit.no5				//Relay4 : J70 
-#define RELAY_C2_ON()			RELAY_C2_PIN = 1
-#define RELAY_C2_OFF()			RELAY_C2_PIN = 0
-#define RELAY_C2_TOGGLE()		RELAY_C2_PIN = ~RELAY_C2_PIN
+//Relay4 : J70
+#define RELAY_C2_ON()			HAL_GPIO_WritePin(RELAY_CAP_2_GPIO_Port, RELAY_CAP_2_Pin, 1)
+#define RELAY_C2_OFF()			HAL_GPIO_WritePin(RELAY_CAP_2_GPIO_Port, RELAY_CAP_2_Pin, 0)
 
-#define RELAY_C3_PIN			P12_bit.no7				//Relay5 : J68
-#define RELAY_C3_ON()			RELAY_C3_PIN = 1
-#define RELAY_C3_OFF()			RELAY_C3_PIN = 0
-#define RELAY_C3_TOGGLE()		RELAY_C3_PIN = ~RELAY_C3_PIN
+//Relay5 : J68
+#define RELAY_C3_ON()			HAL_GPIO_WritePin(RELAY_CAP_3_GPIO_Port, RELAY_CAP_3_Pin, 1)
+#define RELAY_C3_OFF()			HAL_GPIO_WritePin(RELAY_CAP_3_GPIO_Port, RELAY_CAP_3_Pin, 0)
 
 void aw_ledSetMode(uint8_t a_mode);
 void aw_rlyOn(uint8_t a_rly);

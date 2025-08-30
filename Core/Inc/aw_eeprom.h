@@ -14,7 +14,7 @@
 /******************************************************************************
 Includes   <System Includes> , "Project Includes"
 ******************************************************************************/
-#include "typedef.h"        /* GSCE Standard Typedef */
+#include "aw_typedef.h"        /* GSCE Standard Typedef */
 
 /******************************************************************************
 Typedef definitions

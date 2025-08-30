@@ -29,7 +29,10 @@ static void aw_ledTest(void);
 void kt_uartFrameReceived(void);
 void kt_uartResetReceiveIndex(void);
 void kt_uartSetRxTimeout(uint8_t a_Value);
-uint8_t aw_2phGetPerc(void);
+//jena uint8_t aw_2phGetPerc(void);
+
+uint8_t aw_instVoltage(uint8_t* a_pBuf);
+uint8_t aw_instCurrent(uint8_t* a_pBuf);
 //=================================================================================================
 void kt_hostProcess(void)
 {
@@ -61,7 +64,7 @@ void kt_hostProcess(void)
 // analyzing incoming uart frame
 static void kt_hostAnalyze(void)
 {
-	uint8_t i = 0;
+//	uint8_t i = 0;
 	
     // check start char 
     if(fg_hostRxBuf[0] != 0xFE) fg_hostRxBuf[2] = 0x00;
@@ -103,7 +106,7 @@ static void kt_hostAnalyze(void)
 			fg_hostTxBuf[33] = g_errCode;
 			fg_hostTxBuf[34] = SW_AUTO_MANUAL();	//physical switch position
 			fg_hostTxBuf[35] = SW_PHASE();			//physical switch position
-			fg_hostTxBuf[36] = aw_2phGetPerc();		//percentage of current variation in 2phase 
+			//jena fg_hostTxBuf[36] = aw_2phGetPerc();		//percentage of current variation in 2phase
 			fg_hostTxBuf[37] = g_modeOfOperation;	//1: Idle, 2: 2Phase, 3: 3Phase - mode of operation
 			
 			fg_hostTxCount = 34;
@@ -125,7 +128,7 @@ static void kt_hostAnalyze(void)
 			break;
 		//---------------------------------------------------------------
 		case CMD_UART_GET_2PH_PERC:		//read perc
-			fg_hostRxBuf[4] = aw_2phGetPerc();
+			//jena fg_hostRxBuf[4] = aw_2phGetPerc();
 			fg_hostTxCount = 0x01;
 			break;
 		//---------------------------------------------------------------
@@ -170,7 +173,7 @@ static void kt_hostAnalyze(void)
     if(fg_hostTxCount)
     {
         kt_hostMakeFrame();								//make the frame
-		R_UART2_Send(fg_hostTxBuf, fg_hostTxCount);		//Transmit to UART
+		//jena R_UART2_Send(fg_hostTxBuf, fg_hostTxCount);		//Transmit to UART
     }
 
     fg_hostRxIndex = 0x00;

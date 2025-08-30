@@ -187,6 +187,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/aw_idle_app.h</locationURI>
 		</link>
 		<link>
+			<name>Application/User/Core/aw_lcd_gdm.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/aw_lcd_gdm.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/Core/aw_lcd_gdm.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/aw_lcd_gdm.h</locationURI>
+		</link>
+		<link>
 			<name>Application/User/Core/aw_miscFunc.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/aw_miscFunc.c</locationURI>
@@ -225,6 +235,11 @@
 			<name>Application/User/Core/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/main.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/Core/main.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Inc/main.h</locationURI>
 		</link>
 		<link>
 			<name>Application/User/Core/stm32g0xx_hal_msp.c</name>

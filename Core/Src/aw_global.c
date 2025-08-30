@@ -21,6 +21,9 @@ uint8_t g_autoModeCountDownFlag;	//to display auto mode count down before auto m
 uint8_t g_defScreen;				//set default screen [switch can start motor in manual mode]
 uint8_t g_motorStartBySW23;			//to sense, 2nd button pressing to start motor manually
 
+uint16_t g_rsmVoltage[3];		//calculated value from ADC
+uint16_t g_rsmCurrent[3];		//calculated value from ADC
+
 uint32_t g_motorOnSec, g_loadOnSec;	// to stop Motor after configured on time
 uint8_t g_dispInitCount;		//number of display init after any relay switched on
 uint8_t g_vOK[3], g_iOK[3];

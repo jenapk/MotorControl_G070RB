@@ -303,13 +303,15 @@ uint8_t aw_prgSaveValue(uint8_t a_paraValue)
 			g_progPara = a_paraValue;		//1st failed programming parameters
 			g_progStatus = 0x01;			// failed		
 			aw_progExitProgMode();
-			return;
+			return(0);
 		}
 	}
 	
 	//move to next parameter
 	fg_prgInfo.Para++;
 	if(fg_prgInfo.Para == PROG_PARA_COUNT) aw_progExitProgMode();
+
+	return(0);
 }
 
 /* while exiting from prog mode */
@@ -435,10 +437,11 @@ void aw_prgLoadValue(uint8_t a_paraValue)
 //keys will be used as a keyboard
 void aw_prgKeyBoardUse(void)
 {
-	if(!SW_MOVE) 	fg_keyValue = 0x01;	
-	if(!SW_UPDN) 	fg_keyValue = 0x02;
-	if(!SW_SET)  	fg_keyValue = 0x03;
-	if(!SW_SHIFT) 	fg_keyValue|= 0x80; 
+	//jena: below SW pins are to be taken care of
+//	if(!SW_MOVE) 	fg_keyValue = 0x01;
+//	if(!SW_UPDN) 	fg_keyValue = 0x02;
+//	if(!SW_SET)  	fg_keyValue = 0x03;
+//	if(!SW_SHIFT) 	fg_keyValue|= 0x80;
 }
 
 void aw_dispConfigValues(void)
@@ -465,10 +468,11 @@ void aw_dispConfigValues(void)
 uint8_t aw_prgKeyScan(void)
 {
 	fg_keyValue = 0x00;
-	if(!SW_MOVE) 	fg_keyValue = 0x01;	
-	if(!SW_UPDN) 	fg_keyValue = 0x02;
-	if(!SW_SET)  	fg_keyValue = 0x03;
-	if(!SW_SHIFT) 	fg_keyValue|= 0x80; 
+	//jena: below SW pins need to take care of
+//	if(!SW_MOVE) 	fg_keyValue = 0x01;
+//	if(!SW_UPDN) 	fg_keyValue = 0x02;
+//	if(!SW_SET)  	fg_keyValue = 0x03;
+//	if(!SW_SHIFT) 	fg_keyValue|= 0x80;
 	
 	if(fg_prgMode)
 	{

@@ -21,7 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 /* USER CODE BEGIN Includes */
-
+#include "aw_config_io.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

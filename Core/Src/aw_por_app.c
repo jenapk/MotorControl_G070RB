@@ -8,7 +8,7 @@
 #include "aw_eeprom_map.h"
 #include "aw_por_app.h"
 #include "aw_typedef.h"
-#include "inst_read.h"
+//#include "inst_read.h"
 
 void aw_porRead(void)
 {
@@ -83,7 +83,7 @@ uint8_t aw_calibVoltage(uint8_t* a_pVoltage)
 		memcpy(l_2B.Byte, (a_pVoltage + i * 2), 2);
 		l_2B.Value *= 100;
 		
-		g_factVoltage[i] =  (float) l_2B.Value / (float) g_inst_read_params.vrms[i];
+		// jena g_factVoltage[i] =  (float) l_2B.Value / (float) g_inst_read_params.vrms[i];
 	}
 	
 	//write to EEPROM
@@ -101,7 +101,7 @@ uint8_t aw_calibCurrent(uint8_t* a_pCurrent)
 	{
 		l_2B.Value = 0x00;
 		memcpy(l_2B.Byte, (a_pCurrent + i * 2), 2);
-		g_factCurrent[i] =  (float) l_2B.Value / (float) g_inst_read_params.irms[i];
+		//jena g_factCurrent[i] =  (float) l_2B.Value / (float) g_inst_read_params.irms[i];
 	}
 	
 	//write to EEPROM
@@ -196,4 +196,10 @@ void aw_rlyOn(uint8_t a_rly)
 	}
 	
 	g_dispInitCount = LCD_RE_INIT_COUNT;	//number of re-intialization
+}
+
+//jena: to be implemented in flash
+uint8_t EPR_Write(uint32_t addr, uint8_t* buf, uint16_t size)
+{
+	return(0);
 }

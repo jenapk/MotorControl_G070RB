@@ -8,6 +8,7 @@
 #ifndef _KT_HOST_H_
 #define _KT_HOST_H_
 //=======================================================================================
+#include "aw_typedef.h"
 
 #define KT_HOST_UART_RX_BUF_LEN		    32
 #define KT_HOST_UART_TX_BUF_LEN		    40

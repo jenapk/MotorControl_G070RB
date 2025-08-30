@@ -27,6 +27,9 @@ extern uint8_t g_motorStartBySW23;
 
 extern uint32_t g_motorOnSec, g_loadOnSec;
 
+extern uint16_t g_rsmVoltage[3];
+extern uint16_t g_rsmCurrent[3];
+
 extern uint8_t g_vOK[3], g_iOK[3];
 extern uint16_t g_phVolt[3], g_phCurr[3];
 extern uint8_t g_rlyStatus[5];

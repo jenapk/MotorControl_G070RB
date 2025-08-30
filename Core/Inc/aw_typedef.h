@@ -2,7 +2,7 @@
 #ifndef _AW_TYPEDEF_H_
 #define _AW_TYPEDEF_H_
 //=================================================================================================
-#include "typedef.h"
+#include "stdint.h"
 
 typedef union
 {

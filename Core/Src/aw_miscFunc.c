@@ -5,9 +5,9 @@
  *      Author: Administrator
  */
 
-#include "typedef.h"
+#include <stdint.h>
 #include <string.h>
-#include "r_cg_wdt.h"
+//#include "r_cg_wdt.h"
 
 static uint8_t const fg_monthName[12][3] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 /*============================================================================*/
@@ -154,7 +154,8 @@ void aw_miscDelay(uint8_t a_msDelay)
     {
 	    for(j = 0; j < 1024; j++)
         {
-		    R_WDT_Restart();
+	    	//jena: watchdog to be implemented
+			//R_WDT_Restart();
 	    }
     }
 }

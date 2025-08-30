@@ -328,10 +328,13 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, LCD_WR_Pin|RELAY_HEALTH_Pin|RELAY_SD_Pin|LCD_EN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LCD_D0_Pin|LCD_D1_Pin|LCD_D2_Pin|LED_RUN_Pin
@@ -339,13 +342,18 @@ static void MX_GPIO_Init(void)
                           |LCD_D6_Pin|LCD_D7_Pin|LCD_PWR_Pin|LED_HEALTH_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, RELAY_HEALTH_Pin|RELAY_SD_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, RELAY_CAP_1_Pin|RELAY_CAP_2_Pin|DBG_PIN_OUT_Pin|DBG_PIN_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, RELAY_CAP_1_Pin|RELAY_CAP_2_Pin|DBG_PIN_OUT_Pin|DBG_PIN_LED_Pin
+                          |LCD_RS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, RELAY_CAP_3_Pin|GSM_PWR_Pin|GSM_RESET_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : LCD_WR_Pin RELAY_HEALTH_Pin RELAY_SD_Pin LCD_EN_Pin */
+  GPIO_InitStruct.Pin = LCD_WR_Pin|RELAY_HEALTH_Pin|RELAY_SD_Pin|LCD_EN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : SW_LEFT_Pin SW_RIGHT_Pin */
   GPIO_InitStruct.Pin = SW_LEFT_Pin|SW_RIGHT_Pin;
@@ -370,15 +378,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : RELAY_HEALTH_Pin RELAY_SD_Pin */
-  GPIO_InitStruct.Pin = RELAY_HEALTH_Pin|RELAY_SD_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : RELAY_CAP_1_Pin RELAY_CAP_2_Pin DBG_PIN_OUT_Pin DBG_PIN_LED_Pin */
-  GPIO_InitStruct.Pin = RELAY_CAP_1_Pin|RELAY_CAP_2_Pin|DBG_PIN_OUT_Pin|DBG_PIN_LED_Pin;
+  /*Configure GPIO pins : RELAY_CAP_1_Pin RELAY_CAP_2_Pin DBG_PIN_OUT_Pin DBG_PIN_LED_Pin
+                           LCD_RS_Pin */
+  GPIO_InitStruct.Pin = RELAY_CAP_1_Pin|RELAY_CAP_2_Pin|DBG_PIN_OUT_Pin|DBG_PIN_LED_Pin
+                          |LCD_RS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
